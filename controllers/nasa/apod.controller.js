@@ -1,13 +1,15 @@
 const axios = require('axios').default;
 const API_KEY = process.env.NASA_API_KEY;
+const config = require('config');
+const basepath = config.get('services.nasa.basepath');
+const apod = config.get('services.nasa.apod');
 
 async function getApod(req, res){
     const {date, start_date, end_date} = req.query;
     //const date = "2022-05-16";
     //axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}&start_date=${start_date}&end_date=${end_date}`)
     //axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}`)
-    axios.get(`https://api.nasa.gov/planetary/apod`, {
-
+    axios.get(`${basepath}${apod}`, {
         params: {
             api_key: API_KEY,
             date: date,
